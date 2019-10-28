@@ -2,7 +2,7 @@
 include 'banco.php';
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("location: index.html");
+    header('location: index.html');
 }
 ?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 
 <head>
     <title> </title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css ">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="./fontawesome-free-5.11.2-web/css/all.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -65,7 +65,7 @@ if (!isset($_SESSION['user'])) {
                 $user = $data['nome'];
                 Banco::desconectar();
 
-                echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
+                echo '<h4>'.$user.'&nbsp;&nbsp;<h4>';
                 ?>
 
                 <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
@@ -73,30 +73,26 @@ if (!isset($_SESSION['user'])) {
         </div>
     </nav>
     <!-- end navbar -->
-
     <style>
-    th{
-        text-align: center;
-        font-size: 22px;
-    }
-    </style>
+        .card {
+            width: 190px;
+            height: auto;
+            margin-left: 2px;
+            margin-right: 1px;
+        }
 
-<br><br>
-    <div class="container">
-        <table class="table">
-            <tr>
-                <th rowspan="2">id</th>
-                <th rowspan="2">Nome</th>
-                <th rowspan="2">N° do Quarto</th>
-                <th colspan="2">Data</th>
-                <th rowspan="2">Total</th>
-            </tr>
-            <tr>
-                <th>Entrada</th>
-                <th>Saida</th>
-            </tr>
-        </table>
-    </div>
+        h4 {
+            font-size: 25px;
+            font-family: ;
+        }
+
+        div#alert{
+            float: right ;
+        }
+
+    </style>
+    <!-- corpo da pagina -->
+  
 
 </body>
 <!-- Autor: José Leocadio de Barros Junior -->

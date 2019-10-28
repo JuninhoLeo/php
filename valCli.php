@@ -2,27 +2,26 @@
 include 'banco.php';
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("location: index.html");
+    header('location: index.html');
 }
 
-$cli   = trim($_POST['nome']);
-$RG    = trim($_POST['rg']);
-$CPF   = trim($_POST['cpf']);
-$Tel   = trim($_POST['tel']);
-$emai  = trim($_POST['email']);
-$cid   = trim($_POST['cidade']);
-$UF    = trim($_POST['uf']);
+$cli = trim($_POST['nome']);
+$RG = trim($_POST['rg']);
+$CPF = trim($_POST['cpf']);
+$Tel = trim($_POST['tel']);
+$emai = trim($_POST['email']);
+$cid = trim($_POST['cidade']);
+$UF = trim($_POST['uf']);
 
-$tCli   = false;
-$tRG    = false;
-$tCPF   = false;
+$tCli = false;
+$tRG = false;
+$tCPF = false;
 $temail = false;
 
 $pdo = Banco::conectar();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "SELECT * FROM cliente";
+$sql = 'SELECT * FROM cliente';
 foreach ($pdo->query($sql) as $row) {
-
     if ($cli == $row['nome']) {
         $tCli = true;
     }
@@ -44,14 +43,13 @@ Banco::desconectar();
 if ($tCli == false && $tRG == false && $tCPF == false && $temail == false) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO cliente (nome, cpf, rg, cidade, uf, telefone, email)
-                values (?, ?, ?, ?, ?, ?, ?)";
+    $sql = 'INSERT INTO cliente (nome, cpf, rg, cidade, uf, telefone, email)
+                values (?, ?, ?, ?, ?, ?, ?)';
     $q = $pdo->prepare($sql);
     $q->execute(array($cli, $CPF, $RG, $cid, $UF, $Tel, $emai));
     Banco::desconectar();
-    header("location: home.php");
+    header('location: home.php');
 } else {
-
     ?>
     <!DOCTYPE html>
     <html>
@@ -103,18 +101,17 @@ if ($tCli == false && $tRG == false && $tCPF == false && $temail == false) {
                 <form class="form-inline my-2 my-lg-0">
                     <?php
                         $pdo = Banco::conectar();
-                        $sql = 'SELECT nome 
+    $sql = 'SELECT nome 
                             FROM funcionarios 
                             inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
                             where usuarios.usuario =?';
-                        $q = $pdo->prepare($sql);
-                        $q->execute(array($_SESSION['user']));
-                        $data = $q->fetch(PDO::FETCH_ASSOC);
-                        $user = $data['nome'];
-                        Banco::desconectar();
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['user']));
+    $data = $q->fetch(PDO::FETCH_ASSOC);
+    $user = $data['nome'];
+    Banco::desconectar();
 
-                        echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
-                        ?>
+    echo '<h4>'.$user.'&nbsp;&nbsp;<h4>'; ?>
 
                     <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
                 </form>
@@ -130,61 +127,62 @@ if ($tCli == false && $tRG == false && $tCPF == false && $temail == false) {
                 <div class="form-row">
                     <div class="col-md-6">
                         <label for="username" class="text-info">Nome Completo*</label><br>
-                        <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $cli ?>" required>
+                        <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $cli; ?>" required>
                         <?php
                             if ($tCli == true) {
-                                $mensagem = "<h6 style='color: #db0707'><b>Erro</b>: Esse Cliente já está cadastrado!</h6>";
-                                echo $mensagem;
-                            }
-                            ?>
+                                $mensagem = '<b>Erro</b>: Esse Cliente já está cadastrado!';
+                                echo "<div class='alert alert-danger' role='alert'>
+                                ".$mensagem.'</div>';
+                            } ?>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-3">
                         <label for="username" class="text-info">RG* <br> ex:12.234.345-5</label><br>
-                        <input type="text" name="rg" id="rg" class="form-control" value="<?php echo $RG ?>" required>
+                        <input type="text" name="rg" id="rg" class="form-control" value="<?php echo $RG; ?>" required>
                         <?php
                             if ($tRG == true) {
-                                $mensagem = "<h6 style='color: #db0707'><b>Erro</b>: RG inválido ou já cadastrado!</h6>";
-                                echo $mensagem;
-                            }
-                            ?>
+                                $mensagem = '<b>Erro</b>: RG inválido ou já cadastrado!';
+                                echo "<div class='alert alert-danger' role='alert'>
+                                ".$mensagem.'</div>';
+                            } ?>
                     </div>
                     <div class="col-md-3">
                         <label for="username" class="text-info">CPF* <br> ex:123.234.345-56</label><br>
-                        <input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $CPF ?>" required>
+                        <input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $CPF; ?>" required>
                         <?php
                             if ($tCPF == true) {
-                                $mensagem = "<h6 style='color: #db0707'><b>Erro</b>: CPF inválido ou já cadastrado!</h6>";
-                                echo $mensagem;
-                            }
-                            ?>
+                                $mensagem = '<b>Erro</b>: CPF inválido ou já cadastrado!';
+                                echo "<div class='alert alert-danger' role='alert'>
+                                ".$mensagem.'</div>';
+                            } ?>
                     </div>
                     <div class="col-md-3">
                         <label for="username" class="text-info">Telefone* <br> ex:(11)98003-2001</label><br>
-                        <input type="text" name="tel" id="tel" class="form-control" value="<?php echo $Tel ?>" required>
+                        <input type="text" name="tel" id="tel" class="form-control" value="<?php echo $Tel; ?>" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-2">
                         <label for="username" class="text-info">Cidade*</label><br>
-                        <input type="text" name="cidade" id="cidade" class="form-control" value="<?php echo $cid ?>" required>
+                        <input type="text" name="cidade" id="cidade" class="form-control" value="<?php echo $cid; ?>" required>
                     </div>
                     <div class="col-md-2">
                         <label for="username" class="text-info">UF</label><br>
-                        <input type="text" name="uf" id="uf" class="form-control" value="<?php echo $UF ?>" required>
+                        <input type="text" name="uf" id="uf" class="form-control" value="<?php echo $UF; ?>" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6">
                         <label for="username" class="text-info">e-mail* <br> ex:fulanosilva@gmail.com</label><br>
-                        <input type="email" name="email" id="email" class="form-control" value="<?php echo $emai ?>" required>
+                        <input type="email" name="email" id="email" class="form-control" value="<?php echo $emai; ?>" required>
                     <?php
                         if ($temail == true) {
-                            $mensagem = "<h6 style='color: #db0707'><b>Erro</b>: Esse e-mail já está sendo utilizado!</h6>";
-                            echo $mensagem;
+                            $mensagem = '<b>Erro</b>: Esse e-mail já está sendo utilizado!';
+                            echo "<div class='alert alert-danger' role='alert'>
+                                ".$mensagem.'</div>';
                         }
-                    }
+}
                     ?>
                     </div>
                 </div>

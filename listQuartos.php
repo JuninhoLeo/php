@@ -49,7 +49,7 @@ if (!isset($_SESSION['user'])) {
                     <a class="nav-link" href="listClientes.php"><i class="fas fa-users">Clientes</i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="listQuartos.php"><i class="fas fa-hotel">Disponíveis</i></a>
+                    <a class="nav-link" href=""><i class="fas fa-hotel">Disponíveis</i></a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -75,63 +75,67 @@ if (!isset($_SESSION['user'])) {
     <!-- end navbar -->
 
     <!-- corpo da pagina -->
-    <form id="frmlocHotel" name="frmlocHotel">
-        <section class="row" id="hoteis">
-            <ul style="list-style: none">
-                <div class="row" id="pularlinha">
+    <center>
+        <form id="frmlocHotel" name="frmlocHotel">
+            <section class="row" id="hoteis">
+                <ul style="list-style: none">
+                    <div class="row" id="pularlinha">
 
-                    <h1 style="color: white">Lista de Quartos Disponíveis</h1>
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <!--    <th scope="col"><h4><b>ID</b></h4></th> -->
-                                <th scope="col">
-                                    <h4><b>Descrição</b></h4>
-                                </th>
-                                <th scope="col">
-                                    <h4><b>Numero do quarto</b></h4>
-                                </th>
-                                <th scope="col">
-                                    <h4><b>Valor</b></h4>
-                                </th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
+                        <h1 style="color: white">Lista de Quartos Disponíveis</h1>
+                        <div class="container">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <!--    <th scope="col"><h4><b>ID</b></h4></th> -->
+                                        <th scope="col">
+                                            <h4><b>Descrição</b></h4>
+                                        </th>
+                                        <th scope="col">
+                                            <h4><b>Numero do quarto</b></h4>
+                                        </th>
+                                        <th scope="col">
+                                            <h4><b>Valor</b></h4>
+                                        </th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
 
-                        <?php
-                        $pdo = Banco::conectar();
-                        $sql = 'SELECT * FROM disponivel order by valor asc';
-                        foreach ($pdo->query($sql) as $row) {
-                            ?>
+                                <?php
+                                $pdo = Banco::conectar();
+                                $sql = 'SELECT * FROM disponivel order by valor asc';
+                                foreach ($pdo->query($sql) as $row) {
+                                    ?>
 
-                            <tr>
-                                <!--    <th scope="row"><h5><?php echo $row['id'] ?></h5></th>  -->
-                                <th scope="row">
-                                    <h5><?php echo $row['descricao'] ?></h5>
-                                </th>
-                                <th scope="row">
-                                    <h5><?php echo $row['num_quarto'] ?></h5>
-                                </th>
-                                <th scope="row">
-                                    <h5><?php echo $row['valor'] ?></h5>
-                                </th>
-                                <th scope="row" class="text-center">
-                                    <button type="button" class="btn btn-outline-warning" id="btRes" onclick="javascript:location.href='reservaId.php?id='+<?php echo $row['id'] ?>">
-                                        Efetuar Reserva
-                                    </button>
-                                </th>
-                            </tr>
+                                    <tr>
+                                        <!--    <th scope="row"><h5><?php echo $row['id'] ?></h5></th>  -->
+                                        <th scope="row">
+                                            <h5><?php echo $row['descricao'] ?></h5>
+                                        </th>
+                                        <th scope="row">
+                                            <h5><?php echo $row['num_quarto'] ?></h5>
+                                        </th>
+                                        <th scope="row">
+                                            <h5><?php echo $row['valor'] ?></h5>
+                                        </th>
+                                        <th scope="row" class="text-center">
+                                            <button type="button" class="btn btn-outline-warning" id="btRes" onclick="javascript:location.href='reservaId.php?id='+<?php echo $row['id'] ?>">
+                                                Efetuar Reserva
+                                            </button>
+                                        </th>
+                                    </tr>
 
-                        <?php }
-                        Banco::desconectar();
-                        ?>
-                    </table>
+                                <?php }
+                                Banco::desconectar();
+                                ?>
+                            </table>
+                        </div>
+                    </div>
 
-                </div>
+                </ul>
+            </section>
+        </form>
+    </center>
 
-            </ul>
-        </section>
-    </form>
 
 </body>
 <!-- Autor: José Leocadio de Barros Junior -->

@@ -2,7 +2,7 @@
 include 'banco.php';
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("location: index.html");
+    header('location: index.html');
 }
 ?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 
 <head>
     <title> </title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css ">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="./fontawesome-free-5.11.2-web/css/all.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -65,7 +65,7 @@ if (!isset($_SESSION['user'])) {
                 $user = $data['nome'];
                 Banco::desconectar();
 
-                echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
+                echo '<h4>'.$user.'&nbsp;&nbsp;<h4>';
                 ?>
 
                 <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
@@ -73,27 +73,47 @@ if (!isset($_SESSION['user'])) {
         </div>
     </nav>
     <!-- end navbar -->
+    <style>
+        .card {
+            width: 190px;
+            height: auto;
+            margin-left: 2px;
+            margin-right: 1px;
+        }
 
+        h4 {
+            font-size: 25px;
+            font-family: ;
+        }
+
+        div#alert{
+            float: right ;
+        }
+
+    </style>
     <!-- corpo da pagina -->
-    <br><br><br>
+    <br><br>
     <div class="container">
         <div class="card">
             <div class="face face1">
-                <div class="content">
-                    <img src="./images/team.png" width="100px" height="100px">
-                </div>
+                <center>
+                    <div class="content">
+                        <img src="./images/team.png" width="100px" height="100px">
+                    </div>
+                </center>
             </div>
+            
             <div class="face face2">
                 <?php
-                $nome = "nome";
+                $nome = 'nome';
                 $pdo = Banco::conectar();
-                $sql = "SELECT COUNT(?) as cont FROM cliente";
+                $sql = 'SELECT COUNT(?) as cont FROM cliente';
                 $q = $pdo->prepare($sql);
                 $q->execute(array($nome));
                 $data = $q->fetch(PDO::FETCH_ASSOC);
                 $user = $data['cont'];
                 Banco::desconectar();
-                echo "<h3>Clientes<br>Cadastrados: " . $user . "</h3>";
+                echo '<h4><b>Clientes:</b> '.$user.'</h4>';
                 ?>
             </div>
             <button type="button" class="btn btn-outline-success" onclick="javascript:location.href='adCli.php'">
@@ -101,77 +121,98 @@ if (!isset($_SESSION['user'])) {
             <button type="button" class="btn btn-outline-danger" onclick="javascript:location.href='delClientes.php'">
                 Excluir</button>
         </div>
+
         <div class="card">
             <div class="face face1">
-                <div class="content">
-                    <img src="./images/employee.png" width="100px" height="100px">
-                </div>
+                <center>
+                    <div class="content">
+                        <img src="./images/employee.png" width="100px" height="100px">
+                    </div>
+                </center>
+
             </div>
             <div class="face face2">
                 <?php
                 $pdo = Banco::conectar();
-                $sql = "SELECT COUNT(?) as cont FROM funcionarios";
+                $sql = 'SELECT COUNT(?) as cont FROM funcionarios';
                 $q = $pdo->prepare($sql);
                 $q->execute(array('nome'));
                 $data = $q->fetch(PDO::FETCH_ASSOC);
                 $totfunc = $data['cont'];
                 Banco::desconectar();
                 if ($totfunc == 0) {
-                    header("location: logout.php");
+                    header('location: logout.php');
                 }
-                echo "<h3>Funcionarios<br>Cadastrados: " . $totfunc . "</h3>";
+                echo '<h4><b>Funcionarios:</b> '.$totfunc.'</h4>';
                 ?>
             </div>
             <button type="button" class="btn btn-outline-primary" onclick="javascript:location.href='listFunc.php'">
                 Editar</button>
             <button type="button" class="btn btn-outline-danger" onclick="javascript:location.href='delFunc.php'">
-                Excluir</button>
+                Excluir
+            </button>
         </div>
+
         <div class="card">
             <div class="face face1">
-                <div class="content">
-                    <img src="./images/add-hotel-symbol.png" width="100px" height="100px">
-                </div>
+                <center>
+                    <div class="content">
+                        <img src="./images/add-hotel-symbol.png" width="100px" height="100px">
+                    </div>
+                </center>
+
             </div>
             <div class="face face2">
                 <?php
                 $pdo = Banco::conectar();
-                $sql = "SELECT COUNT(?) as cont FROM reserva";
+                $sql = 'SELECT COUNT(?) as cont FROM reserva';
                 $q = $pdo->prepare($sql);
-                $q->execute(array("num-quarto"));
+                $q->execute(array('num-quarto'));
                 $data = $q->fetch(PDO::FETCH_ASSOC);
                 $user = $data['cont'];
                 Banco::desconectar();
-                echo "<h3>Quartos<br>Ocupados: " . $user . "</h3>";
+                echo '<h4><b>Ocupados:</b> '.$user.'</h3>';
                 ?>
             </div>
             <input type="button" class="btn btn-outline-primary" value="Check-in" onclick="javascript:location.href='reserva.php'">
             <input type="button" class="btn btn-outline-secondary" value="Check-out" onclick="javascript:location.href='listReservas.php'">
         </div>
+
         <div class="card">
             <div class="face face1">
-                <div class="content">
-                    <img src="./images/resort.png" width="100px" height="100px">
-                </div>
+                <center>
+                    <div class="content">
+                        <img src="./images/resort.png" width="100px" height="100px">
+                    </div>
+                </center>
             </div>
+
             <div class="face face2">
                 <?php
                 $pdo = Banco::conectar();
-                $sql = "SELECT count(?) as tot FROM disponivel where disp=1";
+                $sql = 'SELECT count(?) as tot FROM disponivel where disp=1';
                 $q = $pdo->prepare($sql);
-                $q->execute(array("disp"));
+                $q->execute(array('disp'));
                 $data = $q->fetch(PDO::FETCH_ASSOC);
-                $user = $data['tot'];
+                $total = $data['tot'];
                 Banco::desconectar();
-                echo "<h3>Quartos<br>Disponíveis: " . $user . "</h3>";
+                echo '<h4><b>Disponíveis: </b>'.$total.'</h4>';
                 ?>
             </div>
             <input type="button" class="btn btn-outline-success" value="Cadastro" onclick="javascript:location.href='adQuarto.php' ">
             <input type="button" class="btn btn-outline-danger" value="Excluir" onclick="javascript:location.href='delQuartos.php'">
         </div>
     </div>
-
-
+    
+    <?php
+        if ($total == 0) {
+            echo '<div class="col-md-3" id="alert">
+                    <div class="alert alert-danger" role="alert">
+                        Não Há quartos disponíveis!!!
+                    </div>
+                </div>';
+        }
+    ?>
 
 </body>
 <!-- Autor: José Leocadio de Barros Junior -->

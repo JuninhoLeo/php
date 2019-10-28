@@ -2,7 +2,7 @@
 include 'banco.php';
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("location: index.html");
+    header('location: index.html');
 }
 
 $num = trim($_POST['numero']);
@@ -12,25 +12,23 @@ $conf = false;
 
 $pdo = Banco::conectar();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "SELECT num_quarto as num from disponivel";
+$sql = 'SELECT num_quarto as num from disponivel';
 foreach ($pdo->query($sql) as $row) {
-
     if ($num == $row['num']) {
         $conf = true;
     }
 }
 Banco::desconectar();
 
-
 if ($conf == false && $val >= 0) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO disponivel (num_quarto, valor, descricao)
-                values (?, ?, ?)";
+    $sql = 'INSERT INTO disponivel (num_quarto, valor, descricao)
+                values (?, ?, ?)';
     $q = $pdo->prepare($sql);
     $q->execute(array($num, $val, $desc));
     Banco::desconectar();
-    header("location: home.php ");
+    header('location: home.php ');
 } else {
     ?>
     <!DOCTYPE html>
@@ -83,18 +81,17 @@ if ($conf == false && $val >= 0) {
                 <form class="form-inline my-2 my-lg-0">
                     <?php
                         $pdo = Banco::conectar();
-                        $sql = 'SELECT nome 
+    $sql = 'SELECT nome 
                             FROM funcionarios 
                             inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
                             where usuarios.usuario =?';
-                        $q = $pdo->prepare($sql);
-                        $q->execute(array($_SESSION['user']));
-                        $data = $q->fetch(PDO::FETCH_ASSOC);
-                        $user = $data['nome'];
-                        Banco::desconectar();
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['user']));
+    $data = $q->fetch(PDO::FETCH_ASSOC);
+    $user = $data['nome'];
+    Banco::desconectar();
 
-                        echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
-                        ?>
+    echo '<h4>'.$user.'&nbsp;&nbsp;<h4>'; ?>
 
                     <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
                 </form>
@@ -112,30 +109,31 @@ if ($conf == false && $val >= 0) {
                 <div class="form-row">
                     <div class="col">
                         <label for="username" class="text-info">Numero do Quarto</label><br>
-                        <input type="text" name="numero" id="numero" class="form-control" value="<?php echo $num ?>" required>
+                        <input type="text" name="numero" id="numero" class="form-control" value="<?php echo $num; ?>" required>
                         <?php
                             if ($conf == true) {
-                                $mensagem = "<h6 style='color: #db0707'><b>Erro</b>: Este Quarto já esta cadastrado!</h6>";
-                                echo $mensagem;
-                            }
-                            ?>
+                                $mensagem = '<b>Erro</b>: Este Quarto já esta cadastrado!';
+                                echo "<div class='alert alert-danger' role='alert'>
+                                ".$mensagem.'</div>';
+                            } ?>
                     </div>
                     <div class="col">
                         <label for="username" class="text-info">Valor</label><br>
-                        <input type="number" name="valor" id="valor" class="form-control" placeholder="R$:" value="<?php echo $val ?>" min="0" step=".01" required>
+                        <input type="number" name="valor" id="valor" class="form-control" placeholder="R$:" value="<?php echo $val; ?>" min="0" step=".01" required>
                     <?php
                         if ($val < 0) {
-                            $mensagem = "<h6 style='color: #db0707'><b>Erro</b>: O valor está incorreto!</h6>";
-                            echo $mensagem;
+                            $mensagem = '<b>Erro</b>: O valor está incorreto!';
+                            echo "<div class='alert alert-danger' role='alert'>
+                            ".$mensagem.'</div>';
                         }
-                    }
+}
                     ?>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col">
                         <label for="username" class="text-info">Descrição</label><br>
-                        <textarea type="text" name="descricao" id="descricao" class="form-control" rows="3" placeholder="Ex: Suíte Master com cama king size, closet, banheiro com 2 duchas, hidromassagem..." required><?php echo $desc ?></textarea>
+                        <textarea type="text" name="descricao" id="descricao" class="form-control" rows="3" placeholder="Ex: Suíte Master com cama king size, closet, banheiro com 2 duchas, hidromassagem..." required><?php echo $desc; ?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
