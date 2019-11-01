@@ -86,18 +86,41 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
 
     <head>
         <title> </title>
+        <link rel="stylesheet" href="home.css ">
         <link rel="stylesheet" href="estilo.css">
+        <link rel="stylesheet" href="./fontawesome-free-5.11.2-web/css/all.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <!-- meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     </head>
+
+    <style>
+        .card {
+            width: 190px;
+            height: auto;
+            margin-left: 2px;
+            margin-right: 1px;
+        }
+
+        h4 {
+            font-size: 25px;
+            font-family: ;
+        }
+
+        div#alert {
+            float: right;
+        }
+    </style>
 
     <body>
         <!-- header -->
@@ -120,7 +143,7 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
                                     if ($tnome == true) {
                                         $mensagem = '<b>Erro</b>: Usuario ja cadastrado!';
                                         echo "<div class='alert alert-danger' role='alert'>
-                                            ".$mensagem.'</div>';
+                                            " . $mensagem . '</div>';
                                     } ?>
                             </div>
 
@@ -132,7 +155,7 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
                                     if ($tusr == true) {
                                         $mensagem = '<b>Erro</b>: Este nome de usuário ja está sendo utilizado!';
                                         echo "<div class='alert alert-danger' role='alert'>
-                                               ".$mensagem.'</div>';
+                                               " . $mensagem . '</div>';
                                     } ?>
                             </div>
                         </div>
@@ -164,7 +187,7 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
                                     if ($trg == true) {
                                         $mensagem = '<b>Erro</b>: RG inválido ou ja cadastrado!';
                                         echo "<div class='alert alert-danger' role='alert'>
-                                               ".$mensagem.'</div>';
+                                               " . $mensagem . '</div>';
                                     } ?>
                             </div>
 
@@ -176,7 +199,7 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
                                     if ($tcpf == true) {
                                         $mensagem = '<b>Erro</b>: CPF inválido ou ja cadastrado!';
                                         echo "<div class='alert alert-danger' role='alert'>
-                                               ".$mensagem.'</div>';
+                                               " . $mensagem . '</div>';
                                     } ?>
                             </div>
 
@@ -195,7 +218,7 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
                                     if ($temail == true) {
                                         $mensagem = '<b>Erro:</b> e-mail já Cadastrado!!';
                                         echo "<div class='alert alert-danger' role='alert'>
-                                               ".$mensagem.'</div>';
+                                               " . $mensagem . '</div>';
                                     } ?>
                             </div>
                         </div>
@@ -208,10 +231,10 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
                                 if ($conf != $senha) {
                                     $mensagem = '<b>Erro</b>: As senhas não conferem!';
                                     echo "<div class='alert alert-danger' role='alert'>
-                                               ".$mensagem.'</div>';
+                                               " . $mensagem . '</div>';
                                 }
-    //fechamento do else
-}
+                                //fechamento do else
+                            }
                             ?>
                             </div>
                             <div class="col">

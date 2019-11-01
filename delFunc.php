@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 
 <head>
     <title> </title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css ">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="./fontawesome-free-5.11.2-web/css/all.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -19,11 +19,32 @@ if (!isset($_SESSION['user'])) {
     <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
+
+<style>
+    .card {
+        width: 190px;
+        height: auto;
+        margin-left: 2px;
+        margin-right: 1px;
+    }
+
+    h4 {
+        font-size: 25px;
+        font-family: ;
+    }
+
+    div#alert {
+        float: right;
+    }
+</style>
 
 <body>
     <!-- header -->
@@ -52,75 +73,76 @@ if (!isset($_SESSION['user'])) {
                     <a class="nav-link" href="listQuartos.php"><i class="fas fa-hotel">Disponíveis</i></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <?php
-                $pdo = Banco::conectar();
-                $sql = 'SELECT nome 
-                            FROM funcionarios 
-                            inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
-                            where usuarios.usuario =?';
-                $q = $pdo->prepare($sql);
-                $q->execute(array($_SESSION['user']));
-                $data = $q->fetch(PDO::FETCH_ASSOC);
-                $user = $data['nome'];
-                Banco::desconectar();
-
-                echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
-                ?>
-
-                <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
-            </form>
         </div>
+        <form class="form-inline my-2 my-lg-0">
+            <?php
+            $pdo = Banco::conectar();
+            $sql = 'SELECT nome 
+                        FROM funcionarios 
+                        inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
+                        where usuarios.usuario =?';
+            $q = $pdo->prepare($sql);
+            $q->execute(array($_SESSION['user']));
+            $data = $q->fetch(PDO::FETCH_ASSOC);
+            $user = $data['nome'];
+            Banco::desconectar();
+
+            echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
+            ?>
+
+            <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
+        </form>
     </nav>
     <!-- end navbar -->
 
     <!-- corpo da pagina -->
-    <form id="frmlocHotel" name="frmlocHotel">
-        <section class="row" id="hoteis">
-            <ul style="list-style: none">
-                <div class="row" id="pularlinha">
-                    <h1 style="color: white">Excluir Funcionários</h1>
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">e-mail</th>
-                                <th scope="col"></th>
+    <div class="container">
+        <form id="frmlocHotel" name="frmlocHotel">
+            <section class="row" id="hoteis">
+                <ul style="list-style: none">
+                    <div class="row" id="pularlinha">
+                        <h1 style="color: white">Excluir Funcionários</h1>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">e-mail</th>
+                                    <th scope="col"></th>
 
-                            </tr>
-                        </thead>
+                                </tr>
+                            </thead>
 
-                        <?php
-                        $pdo = Banco::conectar();
-                        $sql = "SELECT usuario_id, nome, telefone, email
-                                from funcionarios
-                                ORDER by nome";
-                        foreach ($pdo->query($sql) as $row) {
+                            <?php
+                            $pdo = Banco::conectar();
+                            $sql = "SELECT usuario_id, nome, telefone, email
+                                    from funcionarios
+                                    ORDER by nome";
+                            foreach ($pdo->query($sql) as $row) {
+                                ?>
+
+                                <tr>
+
+                                    <td scope="row"><?php echo $row['nome'] ?></td>
+                                    <td scope="row"><?php echo $row['telefone'] ?></td>
+                                    <td scope="row"><?php echo $row['email'] ?></td>
+                                    <td scope="row">
+                                        <button type="button" class="btn btn-outline-danger" id="btRes" onclick="javascript:location.href='remFunc.php?id='+<?php echo $row['usuario_id'] ?>">
+                                            Excluir</button>
+                                    </td>
+                                </tr>
+
+                            <?php }
+                            Banco::desconectar();
                             ?>
+                        </table>
 
-                            <tr>
+                    </div>
 
-                                <td scope="row"><?php echo $row['nome'] ?></td>
-                                <td scope="row"><?php echo $row['telefone'] ?></td>
-                                <td scope="row"><?php echo $row['email'] ?></td>
-                                <td scope="row">
-                                    <button type="button" class="btn btn-outline-danger" id="btRes" onclick="javascript:location.href='remFunc.php?id='+<?php echo $row['usuario_id'] ?>">
-                                        Excluir</button>
-                                </td>
-                            </tr>
-
-                        <?php }
-                        Banco::desconectar();
-                        ?>
-                    </table>
-
-                </div>
-
-            </ul>
-        </section>
-    </form>
-
+                </ul>
+            </section>
+        </form>
+    </div>
 </body>
 <!-- Autor: José Leocadio de Barros Junior -->
 

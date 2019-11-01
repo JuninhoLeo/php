@@ -2,7 +2,7 @@
 include 'banco.php';
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("location: index.html");
+    header('location: index.html');
 }
 ?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 
 <head>
     <title> </title>
-    <link rel="stylesheet" href="home.css ">
+    <link rel="stylesheet" type="text/css" href="home.css">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="./fontawesome-free-5.11.2-web/css/all.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -29,20 +29,27 @@ if (!isset($_SESSION['user'])) {
 </head>
 
 <style>
-    .card {
-        width: 190px;
-        height: auto;
-        margin-left: 2px;
-        margin-right: 1px;
-    }
+    @import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
 
     h4 {
         font-size: 25px;
         font-family: ;
     }
 
-    div#alert {
-        float: right;
+    h4#func {
+        font-family: 'Anton', sans-serif;
+    }
+
+    th {
+        font-size: 20px;
+        font-family: 'Abril Fatface', cursive;
+    }
+
+    td {
+        font-size: 15px;
+        font-family: 'Anton', sans-serif;
+        text-align: center;
     }
 </style>
 
@@ -74,6 +81,7 @@ if (!isset($_SESSION['user'])) {
                 </li>
             </ul>
         </div>
+        </div>
         <form class="form-inline my-2 my-lg-0">
             <?php
             $pdo = Banco::conectar();
@@ -87,7 +95,7 @@ if (!isset($_SESSION['user'])) {
             $user = $data['nome'];
             Banco::desconectar();
 
-            echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
+            echo "<h4 id='func'>" . $user . "&nbsp;&nbsp;<h4>"
             ?>
 
             <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
@@ -96,55 +104,63 @@ if (!isset($_SESSION['user'])) {
     <!-- end navbar -->
 
     <!-- corpo da pagina -->
-    <br>
+    <br><br>
+
     <div class="container">
-        <form id="frmlocHotel" name="frmlocHotel">
-            <section class="row" id="hoteis">
-                <ul style="list-style: none">
-                    <div class="row" id="pularlinha">
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">RG</th>
-                                    <th scope="col">CPF</th>
-                                    <th scope="col">Cidade</th>
-                                    <th scope="col"></th>
+        <form id="frmReserva">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="align-middle" scope="col">ID</th>
+                        <th class="align-middle" scope="col">Cliente</th>
+                        <th class="align-middle" scope="col">N° Quarto</th>
+                        <th class="align-top" scope="col">Funcionário</th>
+                        <th class="align-middle">Data</th>
+                        <th class="align-middle">Tipo</th>
+                    </tr>
+                </thead>
 
-                                </tr>
-                            </thead>
+                <?php
+                $pdo = Banco::conectar();
+                $sql = "SELECT historico.id, cliente.nome as nomecli, historico.quarto, funcionarios.nome as nomefunc, historico.datareg, historico.tipo 
+                        FROM historico 
+                        INNER join cliente ON(cliente.id = historico.cliente) 
+                        INNER join funcionarios ON(funcionarios.id = historico.funcionario) 
+                        ORDER BY id ASC";
 
-                            <?php
-                            $pdo = Banco::conectar();
-                            $sql = "SELECT id, nome, rg, cpf, cidade
-                                from cliente
-                                ORDER by nome";
-                            foreach ($pdo->query($sql) as $row) {
-                                ?>
-
-                                <tr>
-
-                                    <td scope="row"><?php echo $row['nome'] ?></td>
-                                    <td scope="row"><?php echo $row['rg'] ?></td>
-                                    <td scope="row"><?php echo $row['cpf'] ?></td>
-                                    <td scope="row"><?php echo $row['cidade'] ?></td>
-                                    <td scope="row">
-                                        <button type="button" class="btn btn-outline-danger" id="btRes" onclick="javascript:location.href='remCli.php?id='+<?php echo $row['id'] ?>">
-                                            Excluir</button>
-                                    </td>
-                                </tr>
-
-                            <?php }
-                            Banco::desconectar();
+                foreach ($pdo->query($sql) as $row) {
+                    ?>
+                    <tbody>
+                        <tr>
+                            <?php $date = new DateTime($row['datareg']);
+                                  $data = $date->format('d/m/Y');
                             ?>
-                        </table>
-
-                    </div>
-
-                </ul>
-            </section>
+                            <td scope="row"><?php echo $row['id'] ?></td>
+                            <td scope="row"><?php echo $row['nomecli'] ?></td>
+                            <td scope="row"><?php echo $row['quarto'] ?></td>
+                            <td scope="row"><?php echo $row['nomefunc'] ?></td>
+                            <td scope="row"><?php echo $data ?></td>
+                            <td scope="row">
+                                <?php 
+                                    if ($row['tipo'] == 'entrada') {
+                                        echo "<div class='text-success'>Entrada</div>";
+                                    }elseif ($row['tipo'] == 'saida') {
+                                        echo "<div class='text-warning'>Saida</div>";
+                                    }elseif ($row['tipo'] == 'cancelado') {
+                                        echo "<div class='text-danger'>Cancelada</div>";
+                                    }
+                                ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                <?php
+                }
+                Banco::desconectar();
+                ?>
+            </table>
         </form>
     </div>
+
 </body>
 <!-- Autor: José Leocadio de Barros Junior -->
 

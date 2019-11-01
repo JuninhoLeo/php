@@ -11,7 +11,7 @@ $Val = 0;
 
 <head>
     <title> </title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css ">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="./fontawesome-free-5.11.2-web/css/all.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -20,11 +20,25 @@ $Val = 0;
     <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
+
+<style>
+    h4 {
+        font-size: 25px;
+        font-family: ;
+    }
+
+    label {
+        font-size: 14px;
+    }
+</style>
 
 <body>
     <!-- header -->
@@ -53,83 +67,86 @@ $Val = 0;
                     <a class="nav-link" href="listQuartos.php"><i class="fas fa-hotel">Disponíveis</i></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <?php
-                $pdo = Banco::conectar();
-                $sql = 'SELECT nome 
-                            FROM funcionarios 
-                            inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
-                            where usuarios.usuario =?';
-                $q = $pdo->prepare($sql);
-                $q->execute(array($_SESSION['user']));
-                $data = $q->fetch(PDO::FETCH_ASSOC);
-                $user = $data['nome'];
-                Banco::desconectar();
-
-                echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
-                ?>
-
-                <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
-            </form>
         </div>
+        <form class="form-inline my-2 my-lg-0">
+            <?php
+            $pdo = Banco::conectar();
+            $sql = 'SELECT nome 
+                        FROM funcionarios 
+                        inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
+                        where usuarios.usuario =?';
+            $q = $pdo->prepare($sql);
+            $q->execute(array($_SESSION['user']));
+            $data = $q->fetch(PDO::FETCH_ASSOC);
+            $user = $data['nome'];
+            Banco::desconectar();
+
+            echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
+            ?>
+
+            <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
+        </form>
     </nav>
     <!-- end navbar -->
 
 
     <!-- corpo da pagina -->
-
-    <h1 style="color: white">Nova Reserva</h1>
-    <form class="container-fluid" id="frmInsRes" name="frmInsRes" method="POST" action="insRes.php">
-        <div class="form-row">
-            <div class="form-group col-md-5">
-                <label for="lblcli">Nome do Cliente*</label>
-                <select name="Cli" class="custom-select" required>
-                    <option value="">Selecione</option>
-                    <?php
-                    Banco::conectar();
-                    $sql = 'SELECT id,nome FROM cliente';
-                    foreach ($pdo->query($sql) as $row) {
-                        echo '<option value="' . $row['id'] . '">' . $row['nome'] . '</option>';
-                    }
-                    Banco::desconectar();
-                    ?>
-                </select>
+    <br>
+    <div class="container">
+        <form class="login-form" id="frmInsRes" name="frmInsRes" method="POST" action="insRes.php">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="lblcli" class="text-info">Nome do Cliente*</label>
+                    <select name="Cli" class="custom-select" style="height:33px; font-size: 18px;" required>
+                        <option selected>Selecione</option>
+                        <?php
+                        Banco::conectar();
+                        $sql = 'SELECT id,nome FROM cliente';
+                        foreach ($pdo->query($sql) as $row) {
+                            echo '<option value="' . $row['id'] . '">' . $row['nome'] . '</option>';
+                        }
+                        Banco::desconectar();
+                        ?>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-2">
-                <label for="lblQuarto">Valor do Quarto*</label>
-                <select name="num" class="form-control" required>
-                    <option value="">Selecione</option>
-                    <?php
-                    Banco::conectar();
-                    $sql = 'SELECT num_quarto,valor FROM disponivel 
-                        WHERE disp= 1
-                        order by valor';
-                    foreach ($pdo->query($sql) as $row) {
-                        echo '<option value="' . $row['num_quarto'] . '">R$ ' . $row['valor'] . '</option>';
-                    }
-                    Banco::desconectar();
-                    ?>
-                </select>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="lblQuarto" class="text-info">Valor do Quarto*</label>
+                    <select name="num" class="custom-select" style="height:33px; font-size: 18px;" required>
+                        <option value="">Selecione</option>
+                        <?php
+                        Banco::conectar();
+                        $sql = 'SELECT num_quarto,valor FROM disponivel 
+                            WHERE disp= 1
+                            order by valor';
+                        foreach ($pdo->query($sql) as $row) {
+                            echo '<option value="' . $row['num_quarto'] . '">R$ ' . $row['valor'] . '</option>';
+                        }
+                        Banco::desconectar();
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group col-md-7">
+                    <label for="lblDte" class="text-info">Data de Entrada*</label>
+                    <input type="date" name="dataE" id="resData" style="height:30px; font-size: 18px;" required>
+                </div>
+                <div class="form-group col-md-7">
+                    <label for="lblDts" class="text-info">Data de saída (Opcional)</label>
+                    <input type="date" name="dataS" id="resData" style="height:30px; font-size: 18px;">
+                </div>
             </div>
-            <div class="form-group col-md-2">
-                <label for="lblDte">Data de Entrada*</label>
-                <input type="date" name="dataE" id="resData" required>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="lblDts">Data de saída (Opcional)</label>
-                <input type="date" name="dataS" id="resData">
-            </div>
-        </div>
-        <h6 style="color: slategray">Campos com * são obrigatórios</h6 style="color: slategray">
-        <input type="button" name="voltar" class="btn btn-outline-danger" value="Voltar" onclick="javascript:location.href='home.php'">
-        <input type="button" name="Limpar" class="btn btn-outline-warning" value="Limpar" onclick="javascript:location.href='reserva.php'">
-        <input type="submit" id="btGrv" name="btGrv" class="btn btn-outline-success" value="Gravar">
 
-    </form>
-
+            <h6 style="color: slategray">Campos com * são obrigatórios</h6 style="color: slategray">
+            
+            <div align="right">
+                <input type="button" name="voltar" class="btn btn-outline-danger" value="Voltar" onclick="javascript:location.href='home.php'">
+                <input type="button" name="Limpar" class="btn btn-outline-warning" value="Limpar" onclick="javascript:location.href='reserva.php'">
+                <input type="submit" id="btGrv" name="btGrv" class="btn btn-success" value="Gravar">
+            </div>
+        </form>
+    </div>
 </body>
 <!-- Autor: José Leocadio de Barros Junior -->
 

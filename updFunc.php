@@ -88,7 +88,7 @@ if ($tnome  == false && $tNuser == false && $tRG == false && $tCPF == false && $
 
 <head>
     <title> </title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css ">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="./fontawesome-free-5.11.2-web/css/all.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -97,11 +97,32 @@ if ($tnome  == false && $tNuser == false && $tRG == false && $tCPF == false && $
     <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
+
+<style>
+    .card {
+        width: 190px;
+        height: auto;
+        margin-left: 2px;
+        margin-right: 1px;
+    }
+
+    h4 {
+        font-size: 25px;
+        font-family: ;
+    }
+
+    div#alert {
+        float: right;
+    }
+</style>
 
 <body>
     <!-- header -->
@@ -130,28 +151,28 @@ if ($tnome  == false && $tNuser == false && $tRG == false && $tCPF == false && $
                     <a class="nav-link" href="listQuartos.php"><i class="fas fa-hotel">Disponíveis</i></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <?php
-                $pdo = Banco::conectar();
-                $sql = 'SELECT nome 
-                            FROM funcionarios 
-                            inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
-                            where usuarios.usuario =?';
-                $q = $pdo->prepare($sql);
-                $q->execute(array($_SESSION['user']));
-                $data = $q->fetch(PDO::FETCH_ASSOC);
-                $user = $data['nome'];
-                Banco::desconectar();
-
-                echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
-                ?>
-
-                <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
-            </form>
         </div>
+        <form class="form-inline my-2 my-lg-0">
+            <?php
+            $pdo = Banco::conectar();
+            $sql = 'SELECT nome 
+                        FROM funcionarios 
+                        inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
+                        where usuarios.usuario =?';
+            $q = $pdo->prepare($sql);
+            $q->execute(array($_SESSION['user']));
+            $data = $q->fetch(PDO::FETCH_ASSOC);
+            $user = $data['nome'];
+            Banco::desconectar();
+
+            echo "<h4>" . $user . "&nbsp;&nbsp;<h4>"
+            ?>
+
+            <button class="btn btn-secondary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal" onclick="location.href='logout.php'">Logout</button>
+        </form>
     </nav>
     <!-- end navbar -->
-    
+
 
     <!-- corpo da pagina -->
     <div class="container">
