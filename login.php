@@ -55,6 +55,7 @@ if ($tnome == false or $tsenha == false) {
 
    <style>
       @import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Lora&display=swap');
 
       body {
          margin: 0;
@@ -67,7 +68,7 @@ if ($tnome == false or $tsenha == false) {
 
       label {
          font-size: 15px;
-         font-family: 'Staatliches', cursive;
+         font-family: 'Lora', serif;
       }
 
       #login .container #login-row #login-column #login-box {
@@ -81,14 +82,33 @@ if ($tnome == false or $tsenha == false) {
          padding: 20px;
       }
 
-      #login .container #login-row #login-column #login-box #login-form #register-link {
-         margin-top: -85px;
+      #login .container #login-row #login-column #login-box #login-form #register {
+         margin: 20px;
       }
 
-      div#register{
+      div#register {
          text-align: center;
       }
 
+      div#rodape {
+         height: 50px;
+         background-color: black;
+         margin-top: 60px;
+         margin-right: 0px;
+         margin-left: 0px;
+         width: 100%;
+      }
+
+      h4#notas {
+         color: #9C9C9C;
+         font-size: 10px;
+         text-align: center;
+      }
+
+      h3#textlogin {
+         font-size: 50px;
+         font-family: 'Staatliches', cursive;
+      }
    </style>
 
    <body>
@@ -108,7 +128,7 @@ if ($tnome == false or $tsenha == false) {
                <div id="login-column" class="col-md-12">
                   <div id="login-box" class="col-md-12">
                      <form id="login-form" class="form" action="login.php" method="post">
-                        <h3 class="text-center text-info">Login</h3>
+                        <h3 class="text-center text-info" id="textlogin">Login</h3>
                         <div class="form-group col-md-12">
                            <?php
 
@@ -132,7 +152,7 @@ if ($tnome == false or $tsenha == false) {
                         </div>
                         <div id="register" class="col-md-12">
                            <h6>Novo por aqui? faça já seu cadastro</h6>
-                           <a href="adfunc.php" class="text-info"><b>Novo funcionario</b></a>
+                           <a href="adfunc.php" class="text-info"><b>Novo funcionario</b></a><br>
                         </div>
                      </form>
                   </div>
@@ -140,8 +160,19 @@ if ($tnome == false or $tsenha == false) {
             </div>
          </div>
       </div>
-   </body>
 
+      <div id="rodape">
+         <!-- 
+      Aqui fica as notas de rodapé 
+      Só não usei o <footer> porque
+      o bootsnipp esta bloqueando o 
+      css 
+   -->
+         <br>
+         <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
+      </div>
+
+   </body>
 
    </html>
 

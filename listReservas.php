@@ -42,7 +42,7 @@ Banco::desconectar();
 <style>
     @import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
-    
+
     h4 {
         font-size: 25px;
         font-family: ;
@@ -57,6 +57,21 @@ Banco::desconectar();
     td {
         font-size: 15px;
         font-family: 'Anton', sans-serif;
+        text-align: center;
+    }
+
+    div#rodape {
+        height: 50px;
+        background-color: black;
+        margin-top: 60px;
+        margin-right: 0px;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    h4#notas {
+        color: #9C9C9C;
+        font-size: 10px;
         text-align: center;
     }
 </style>
@@ -164,8 +179,19 @@ Banco::desconectar();
         </form>
     </div>
 
-
 </body>
+<br><br><br><br><br><br><br>
+    <div id="rodape">
+        <!-- 
+        Aqui fica as notas de rodapé 
+        Só não usei o <footer> porque
+        o bootsnipp esta bloqueando o 
+        css 
+    -->
+        <br>
+        <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
+    </div>
+
 <!-- Autor: José Leocadio de Barros Junior -->
 
 </html>

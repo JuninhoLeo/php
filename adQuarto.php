@@ -48,6 +48,21 @@ if (!isset($_SESSION['user'])) {
     label {
         font-size: 14px;
     }
+
+    div#rodape {
+        height: 50px;
+        background-color: black;
+        margin-top: 60px;
+        margin-right: 0px;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    h4#notas {
+        color: #9C9C9C;
+        font-size: 10px;
+        text-align: center;
+    }
 </style>
 
 <body>
@@ -108,11 +123,11 @@ if (!isset($_SESSION['user'])) {
             <div class="form-row">
                 <div class="col-md-6">
                     <label for="username" class="text-info">Numero do Quarto</label><br>
-                    <input type="text" name="numero" id="numero" class="form-control" required>
+                    <input type="text" name="numero" id="numero" class="form-control" style="height:30px; font-size: 18px;" required>
                 </div>
                 <div class="col-md-6">
                     <label for="username" class="text-info">Valor</label><br>
-                    <input type="number" name="valor" id="valor" class="form-control" placeholder="R$:" required>
+                    <input type="number" name="valor" id="valor" class="form-control" placeholder="R$:" style="height:30px; font-size: 18px;" required>
                 </div>
             </div>
             <div class="form-row">
@@ -131,8 +146,19 @@ if (!isset($_SESSION['user'])) {
         </form>
     </div>
 
-
 </body>
+<br><br>
+    <div id="rodape">
+        <!-- 
+        Aqui fica as notas de rodapé 
+        Só não usei o <footer> porque
+        o bootsnipp esta bloqueando o 
+        css 
+    -->
+        <br>
+        <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
+    </div>
+
 <!-- Autor: José Leocadio de Barros Junior -->
 
 </html>

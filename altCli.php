@@ -59,9 +59,29 @@ Banco::desconectar();
         font-family: ;
     }
 
+    label{
+        font-size: 14px;
+    }
+
     div#alert {
         float: right;
     }
+
+    div#rodape {
+        height: 50px;
+        background-color: black;
+        margin-top: 60px;
+        margin-right: 0px;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    h4#notas {
+        color: #9C9C9C;
+        font-size: 10px;
+        text-align: center;
+    }
+
 </style>
 
 <body>
@@ -126,50 +146,61 @@ Banco::desconectar();
             <!-- Nao apagar !!!! -->
 
             <div class="form-row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="username" class="text-info">Nome Completo*</label><br>
-                    <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $nome ?>" required>
+                    <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $nome ?>" style="height:30px; font-size: 18px;" required>
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="username" class="text-info">RG* <br> ex:12.234.345-5</label><br>
-                    <input type="text" name="rg" id="rg" class="form-control" value="<?php echo $RG ?>" required>
+                    <input type="text" name="rg" id="rg" class="form-control" value="<?php echo $RG ?>" style="height:30px; font-size: 18px;" required>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="username" class="text-info">CPF* <br> ex:123.234.345-56</label><br>
-                    <input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $CPF ?>" required>
+                    <input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $CPF ?>" style="height:30px; font-size: 18px;" required>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="username" class="text-info">Telefone* <br> ex:(11)98003-2001</label><br>
-                    <input type="text" name="tel" id="tel" class="form-control" value="<?php echo $Tel ?>" required>
+                    <input type="text" name="tel" id="tel" class="form-control" value="<?php echo $Tel ?>" style="height:30px; font-size: 18px;" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-2">
                     <label for="username" class="text-info">Cidade*</label><br>
-                    <input type="text" name="cidade" id="cidade" class="form-control" value="<?php echo $cid ?>" required>
+                    <input type="text" name="cidade" id="cidade" class="form-control" value="<?php echo $cid ?>" style="height:30px; font-size: 18px;" required>
                 </div>
                 <div class="col-md-2">
                     <label for="username" class="text-info">UF</label><br>
-                    <input type="text" name="uf" id="uf" class="form-control" value="<?php echo $UF ?>" required>
+                    <input type="text" name="uf" id="uf" class="form-control" value="<?php echo $UF ?>" style="height:30px; font-size: 18px;" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6">
                     <label for="username" class="text-info">e-mail* <br> ex:fulanosilva@gmail.com</label><br>
-                    <input type="email" name="email" id="email" class="form-control" value="<?php echo $emai ?>" required>
+                    <input type="email" name="email" id="email" class="form-control" value="<?php echo $emai ?>" style="height:30px; font-size: 18px;" required>
                 </div>
             </div>
             <br>
             <div class="form-group">
-                <div>
+                <div align="right">
                     <input type="button" name="voltar" class="btn btn-outline-danger" value="Voltar" onclick="javascript:location.href='listClientes.php'">
                     <input type="reset" name="reset" class="btn btn-outline-warning" value="Limpar">
-                    <input type="submit" name="alterar" class="btn btn-outline-success" value="Alterar">
+                    <input type="submit" name="alterar" class="btn btn-success" value="Alterar">
                 </div>
             </div>
         </form>
+    </div>
+
+    <div id="rodape">
+        <!-- 
+        Aqui fica as notas de rodapé 
+        Só não usei o <footer> porque
+        o bootsnipp esta bloqueando o 
+        css 
+    -->
+        <br>
+        <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
     </div>
 
 </body>

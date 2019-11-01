@@ -93,6 +93,21 @@ if (!isset($_SESSION['user'])) {
         div#alert {
             float: right;
         }
+
+        div#rodape {
+            height: 50px;
+            background-color: black;
+            margin-top: 60px;
+            margin-right: 0px;
+            margin-left: 0px;
+            width: 100%;
+        }
+
+        h4#notas {
+            color: #9C9C9C;
+            font-size: 10px;
+            text-align: center;
+        }
     </style>
     <!-- corpo da pagina -->
     <br><br>
@@ -231,6 +246,18 @@ if (!isset($_SESSION['user'])) {
     ?>
 
 </body>
+<br><br>
+    <div id="rodape">
+        <!-- 
+        Aqui fica as notas de rodapé 
+        Só não usei o <footer> porque
+        o bootsnipp esta bloqueando o 
+        css 
+    -->
+        <br>
+        <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
+    </div>
+
 <!-- Autor: José Leocadio de Barros Junior -->
 
 </html>

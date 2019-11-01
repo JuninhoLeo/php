@@ -49,6 +49,10 @@ Banco::desconectar();
         margin-right: 1px;
     }
 
+    label {
+        font-size: 14px;
+    }
+
     h4 {
         font-size: 25px;
         font-family: ;
@@ -56,6 +60,21 @@ Banco::desconectar();
 
     div#alert {
         float: right;
+    }
+
+    div#rodape {
+        height: 50px;
+        background-color: black;
+        margin-top: 60px;
+        margin-right: 0px;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    h4#notas {
+        color: #9C9C9C;
+        font-size: 10px;
+        text-align: center;
     }
 </style>
 
@@ -113,9 +132,9 @@ Banco::desconectar();
     <div class="container">
         <form class="login-form" id="frmInsRes" name="frmInsRes" method="POST" action="insRes.php">
             <div class="form-row">
-                <div class="form-group col-md-10">
+                <div class="form-group col-md-12">
                     <label for="lblcli" class="text-info">Nome do Cliente*</label>
-                    <select name="Cli" class="custom-select" required>
+                    <select name="Cli" class="custom-select" style="height:33px; font-size: 18px;" required>
                         <option value="">Selecione</option>
                         <?php
                         Banco::conectar();
@@ -130,9 +149,9 @@ Banco::desconectar();
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                     <label for="lblQuarto" class="text-info">Valor do Quarto*</label>
-                    <select name="num" class="form-control" required>
+                    <select name="num" class="form-control" style="height:33px; font-size: 18px;" required>
                         <option selected="<?php $Val ?>">
                             <?php
                             if ($Val != 0) {
@@ -156,22 +175,34 @@ Banco::desconectar();
                 </div>
                 <div class="form-group col-md-6">
                     <label for="lblDte" class="text-info">Data de Entrada*</label>
-                    <input type="date" name="dataE" id="resData" required>
+                    <input type="date" name="dataE" id="resData" style="height:30px; font-size: 18px;" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="lblDts" class="text-info">Data de saída (Opcional)</label>
-                    <input type="date" name="dataS" id="resData">
+                    <input type="date" name="dataS" id="resData" style="height:30px; font-size: 18px;">
                 </div>
             </div>
-            <h6 style="color: slategray">Campos com * são obrigatórios</h6 style="color: slategray">
-            <input type="button" name="voltar" class="btn btn-outline-danger" value="Voltar" onclick="javascript:location.href='home.php'">
-            <input type="button" name="Limpar" class="btn btn-outline-warning" value="Limpar" onclick="javascript:location.href='reserva.php'">
-            <input type="submit" id="btGrv" name="btGrv" class="btn btn-success" value="Gravar">
-
+            <div align="right">
+                <input type="button" name="voltar" class="btn btn-outline-danger" value="Voltar" onclick="javascript:location.href='home.php'">
+                <input type="button" name="Limpar" class="btn btn-outline-warning" value="Limpar" onclick="javascript:location.href='reserva.php'">
+                <input type="submit" id="btGrv" name="btGrv" class="btn btn-success" value="Gravar">
+            </div>
         </form>
     </div>
 
 </body>
+<br><br>
+<div id="rodape">
+    <!-- 
+        Aqui fica as notas de rodapé 
+        Só não usei o <footer> porque
+        o bootsnipp esta bloqueando o 
+        css 
+    -->
+    <br>
+    <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
+</div>
+
 <!-- Autor: José Leocadio de Barros Junior -->
 
 </html>
