@@ -126,7 +126,7 @@ if ($tnome == false && $trg == false && $tcpf == false && $conf == $senha && $te
         <!-- header -->
         <div class="container-fluid header">
             <header>
-                Hotel Pet
+                Sistema Hoteleiro
             </header>
         </div>
         <div id="login-row" class="row justify-content-center align-items-center">

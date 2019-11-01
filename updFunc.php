@@ -128,7 +128,7 @@ if ($tnome  == false && $tNuser == false && $tRG == false && $tCPF == false && $
     <!-- header -->
     <div class="container-fluid header">
         <header>
-            Hotel Pet
+            Sistema Hoteleiro
         </header>
     </div>
     <!-- end header -->

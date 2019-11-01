@@ -44,7 +44,7 @@ $Val = 0;
     <!-- header -->
     <div class="container-fluid header">
         <header>
-            Hotel Pet
+            Sistema Hoteleiro
         </header>
     </div>
     <!-- end header -->
@@ -139,7 +139,7 @@ $Val = 0;
             </div>
 
             <h6 style="color: slategray">Campos com * são obrigatórios</h6 style="color: slategray">
-            
+
             <div align="right">
                 <input type="button" name="voltar" class="btn btn-outline-danger" value="Voltar" onclick="javascript:location.href='home.php'">
                 <input type="button" name="Limpar" class="btn btn-outline-warning" value="Limpar" onclick="javascript:location.href='reserva.php'">

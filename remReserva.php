@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION['user'])) {
     header("location: index.html");
 }
-$id = trim($_GET['id']);
+$id = trim($_POST['id']);
 
 if (!empty($id)) {
     $pdo = Banco::conectar();

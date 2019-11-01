@@ -89,7 +89,7 @@ Banco::desconectar();
     <!-- header -->
     <div class="container-fluid header">
         <header>
-            Hotel Pet
+            Sistema Hoteleiro
         </header>
     </div>
     <!-- end header -->
@@ -140,7 +140,7 @@ Banco::desconectar();
             <div id='mainContentWrapper'>
                 <div class="col-md-12 col-md-offset-2">
                     <div class="shopping_cart">
-                        <form class="form-horizontal" role="form" action="" method="post" id="payment-form">
+                        <form class="form-horizontal" role="form" action="remReserva.php" method="POST" id="payment-form">
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -154,18 +154,18 @@ Banco::desconectar();
                                         <div class="panel-body">
                                             <div class="items">
                                                 <div class="col-md-12">
-                                                    <table>
-                                                        <?php
-                                                        $total = 0;
-                                                        $pdo = Banco::conectar();
-                                                        $sql = 'SELECT reserva.id, cliente.nome, reserva.num_quarto, disponivel.descricao, reserva.entrada, reserva.saida, reserva.total, funcionarios.nome, curdate()
-                                                                    FROM reserva 
-                                                                    INNER JOIN cliente on(cliente.id = reserva.id_user) 
-                                                                    INNER JOIN funcionarios on(funcionarios.id = reserva.func_id) 
-                                                                    INNER join disponivel on(disponivel.num_quarto = reserva.num_quarto) 
-                                                                    WHERE reserva.id_user = ' . $idcli;
-                                                        foreach ($pdo->query($sql) as $row) {
-                                                            ?>
+                                                    <?php
+                                                    $total = 0;
+                                                    $pdo = Banco::conectar();
+                                                    $sql = 'SELECT reserva.id, cliente.nome as nomecli, reserva.num_quarto, disponivel.descricao, reserva.entrada, reserva.saida, reserva.total, funcionarios.nome, curdate()
+                                                                FROM reserva 
+                                                                INNER JOIN cliente on(cliente.id = reserva.id_user) 
+                                                                INNER JOIN funcionarios on(funcionarios.id = reserva.func_id) 
+                                                                INNER join disponivel on(disponivel.num_quarto = reserva.num_quarto) 
+                                                                WHERE reserva.id_user = ' . $idcli;
+                                                    foreach ($pdo->query($sql) as $row) {
+                                                        ?>
+                                                        <table class="table-bordered">
                                                             <tr>
                                                                 <td colspan="2" align="center">
                                                                     <a class="btn btn-warning btn-sm pull-right" onclick="javascript:location.href='updres.php?id='+<?php echo $row['id'] ?>+'&cli='+<?php echo $idcli ?>+'&quarto='+<?php echo $row['num_quarto'] ?>" title="Remove Item">X</a>
@@ -201,7 +201,7 @@ Banco::desconectar();
                                                             </tr>
                                                             <tr>
                                                                 <td id="info">Cliente:</td>
-                                                                <td id="desc"><?php echo $row['nome'] ?></b></td>
+                                                                <td id="desc"><?php echo $row['nomecli'] ?></b></td>
                                                             </tr>
                                                             <tr>
                                                                 <td id="info">Quarto:</td>
@@ -230,11 +230,11 @@ Banco::desconectar();
                                                                 <td id="info">Valor Unt:</td>
                                                                 <td id="desc">R$: <?php echo number_format($row['total'], 2, ',', '.') . '</b>' ?></b></td>
                                                             <tr>
-                                                            <?php
-                                                                $total += $valor;
-                                                            }
-                                                            ?>
-                                                    </table>
+                                                        </table>
+                                                    <?php
+                                                        $total += $valor;
+                                                    }
+                                                    ?>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div style="text-align: center;">
@@ -332,6 +332,11 @@ Banco::desconectar();
                                                     </label>
                                                     <div class="col-sm-3">
                                                         <input type="text" class="form-control" stripe-data="cvc" id="card-cvc" style="height:33px; font-size: 15px; width: 50px;" maxlength=3 required>
+
+                                                        <!-- ID lançado oculto para metodo POST -->
+                                                        <input type="hidden" name="id" value="<?php echo $idcli ?>">
+                                                        <!-- Nao apagar !!!! -->
+
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -339,7 +344,7 @@ Banco::desconectar();
                                                     </div>
                                                 </div>
                                         </fieldset>
-                                        <button type="submit" class="btn btn-success btn-lg" style="width:100%;" onclick="javascript:location.href='remReserva.php?id='+<?php echo $idcli ?>">
+                                        <button type="submit" class="btn btn-success btn-lg" style="width:100%;">
                                             Finalizar Pagamento
                                         </button>
                                         <br />

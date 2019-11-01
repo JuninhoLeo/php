@@ -57,6 +57,7 @@ Banco::desconectar();
     td {
         font-size: 15px;
         font-family: 'Anton', sans-serif;
+        text-align: center;
     }
 </style>
 
@@ -64,7 +65,7 @@ Banco::desconectar();
     <!-- header -->
     <div class="container-fluid header">
         <header>
-            Hotel Pet
+            Sistema Hoteleiro
         </header>
     </div>
     <!-- end header -->
@@ -118,7 +119,7 @@ Banco::desconectar();
                     <tr>
                         <th class="align-middle" scope="col" rowspan="2">id</th>
                         <th class="align-middle" scope="col" rowspan="2">Nome</th>
-                        <th class="align-middle" scope="col" rowspan="2">N° do Quarto</th>
+                        <th class="align-middle" scope="col" rowspan="2">N° de Quartos</th>
                         <th class="align-top" scope="col" colspan="2">
                             <center>Data</center>
                         </th>
@@ -133,15 +134,16 @@ Banco::desconectar();
 
                 <?php
                 $pdo = Banco::conectar();
-                $sql = "SELECT reserva.id, cliente.id as cli, cliente.nome, reserva.num_quarto, reserva.entrada, reserva.saida, reserva.total 
+                $sql = "SELECT reserva.id, cliente.id as cli, cliente.nome, COUNT(reserva.num_quarto) as num_quarto, reserva.entrada, reserva.saida, reserva.total 
                         FROM reserva 
                         INNER JOIN cliente on (reserva.id_user = cliente.id) 
-                        ORDER BY cliente.nome";
+                        GROUP BY cliente.nome
+";
                 foreach ($pdo->query($sql) as $row) {
                     ?>
                     <tbody>
                         <tr>
-                            <td scope="row"><?php echo $row['id'] ?></td>
+                            <td scope="row"><?php echo $row['cli'] ?></td>
                             <td scope="row"><?php echo $row['nome'] ?></td>
                             <td scope="row"><?php echo $row['num_quarto'] ?></td>
                             <td scope="row"><?php echo $row['entrada'] ?></td>

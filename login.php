@@ -71,7 +71,6 @@ if ($tnome == false or $tsenha == false) {
       }
 
       #login .container #login-row #login-column #login-box {
-         margin-top: 120px;
          max-width: 600px;
          height: auto;
          border: 1px solid #9C9C9C;
@@ -85,9 +84,23 @@ if ($tnome == false or $tsenha == false) {
       #login .container #login-row #login-column #login-box #login-form #register-link {
          margin-top: -85px;
       }
+
+      div#register{
+         text-align: center;
+      }
+
    </style>
 
    <body>
+
+      <!-- header -->
+      <div class="container-fluid header">
+         <header>
+            Sistema Hoteleiro
+         </header>
+      </div>
+      <!-- end header -->
+
       <div id="login">
          <h3 class="text-center text-white pt-5">Login form</h3>
          <div class="container">
@@ -101,10 +114,10 @@ if ($tnome == false or $tsenha == false) {
 
                               if ($tnome == false) {
                                  echo "<div class='alert alert-danger' role='alert'>
-                              <b>Erro</b>: Usuario ou senha invalida!</div>";
+                              <b>Erro</b>: Usuario e/ou senha invalida!</div>";
                               } elseif ($tsenha == false && $tnome == true) {
-                                  echo "<div class='alert alert-danger' role='alert'>
-                                       <b>Erro</b>: Usuario ou senha invalida!</div>";
+                                 echo "<div class='alert alert-danger' role='alert'>
+                                       <b>Erro</b>: Usuario e/ou senha invalida!</div>";
                               } else {
                                  echo "<label for='username' class='text-info'>Nome de Usuario:";
                               }
@@ -112,17 +125,14 @@ if ($tnome == false or $tsenha == false) {
                            <input type="text" name="usr" id="usr" class="form-control" value="<?php echo $usr; ?>" required>
                         </div>
                         <div class="form-group col-md-12">
-                          <label for='password' class='text-info'>Senha:</label>
+                           <label for='password' class='text-info'>Senha:</label>
                            <input type="password" name="pwd" id="pwd" class="form-control" value="<?php echo $pwd; ?>" required>
+                           <br>
+                           <input type="submit" name="submit" class="btn btn-info btn-lg btn-block" value="Login">
                         </div>
-
-                        <div class="form-group">
-
-                           <input type="submit" name="submit" class="btn btn-info btn-md" value="login">
-                        </div><br>
-                        <div id="register-link" class="text-right">
+                        <div id="register" class="col-md-12">
                            <h6>Novo por aqui? faça já seu cadastro</h6>
-                           <a href="adfunc.php" class="text-info">Novo funcionario</a>
+                           <a href="adfunc.php" class="text-info"><b>Novo funcionario</b></a>
                         </div>
                      </form>
                   </div>

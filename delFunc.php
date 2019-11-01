@@ -50,7 +50,7 @@ if (!isset($_SESSION['user'])) {
     <!-- header -->
     <div class="container-fluid header">
         <header>
-            Hotel Pet
+            Sistema Hoteleiro
         </header>
     </div>
     <!-- end header -->

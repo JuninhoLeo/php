@@ -57,7 +57,7 @@ if (!isset($_SESSION['user'])) {
     <!-- header -->
     <div class="container-fluid header">
         <header>
-            Hotel Pet
+            Sistema Hoteleiro
         </header>
     </div>
     <!-- end header -->
@@ -133,23 +133,23 @@ if (!isset($_SESSION['user'])) {
                     <tbody>
                         <tr>
                             <?php $date = new DateTime($row['datareg']);
-                                  $data = $date->format('d/m/Y');
-                            ?>
+                                $data = $date->format('d/m/Y');
+                                ?>
                             <td scope="row"><?php echo $row['id'] ?></td>
                             <td scope="row"><?php echo $row['nomecli'] ?></td>
                             <td scope="row"><?php echo $row['quarto'] ?></td>
                             <td scope="row"><?php echo $row['nomefunc'] ?></td>
                             <td scope="row"><?php echo $data ?></td>
                             <td scope="row">
-                                <?php 
+                                <?php
                                     if ($row['tipo'] == 'entrada') {
                                         echo "<div class='text-success'>Entrada</div>";
-                                    }elseif ($row['tipo'] == 'saida') {
+                                    } elseif ($row['tipo'] == 'saida') {
                                         echo "<div class='text-warning'>Saida</div>";
-                                    }elseif ($row['tipo'] == 'cancelado') {
+                                    } elseif ($row['tipo'] == 'cancelado') {
                                         echo "<div class='text-danger'>Cancelada</div>";
                                     }
-                                ?>
+                                    ?>
                             </td>
                         </tr>
                     </tbody>

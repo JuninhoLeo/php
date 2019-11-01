@@ -76,7 +76,7 @@ if ($conf == false && $val >= 0) {
         <!-- header -->
         <div class="container-fluid header">
             <header>
-                Hotel Pet
+                Sistema Hoteleiro
             </header>
         </div>
         <!-- end header -->

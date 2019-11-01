@@ -44,17 +44,16 @@ if (!isset($_SESSION['user'])) {
         float: right;
     }
 
-    label{
+    label {
         font-size: 14px;
     }
-
 </style>
 
 <body>
     <!-- header -->
     <div class="container-fluid header">
         <header>
-            Hotel Pet
+            Sistema Hoteleiro
         </header>
     </div>
     <!-- end header -->

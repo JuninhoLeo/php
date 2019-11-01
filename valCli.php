@@ -96,7 +96,7 @@ if ($tCli == false && $tRG == false && $tCPF == false && $temail == false) {
         <!-- header -->
         <div class="container-fluid header">
             <header>
-                Hotel Pet
+                Sistema Hoteleiro
             </header>
         </div>
         <!-- end header -->
