@@ -29,6 +29,14 @@ if (!isset($_SESSION['user'])) {
 </head>
 
 <style>
+    .header {
+        background-color: black;
+        font-family: 'Modak', cursive;
+        color: paleturquoise;
+        padding: 2%;
+        text-align: center;
+    }
+
     .card {
         width: 190px;
         height: auto;
@@ -166,16 +174,16 @@ if (!isset($_SESSION['user'])) {
 
 </body>
 <br><br>
-    <div id="rodape">
-        <!-- 
+<div id="rodape">
+    <!-- 
         Aqui fica as notas de rodapé 
         Só não usei o <footer> porque
         o bootsnipp esta bloqueando o 
         css 
     -->
-        <br>
-        <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
-    </div>
+    <br>
+    <h4 id="notas"> &copy; COPYRIGHT 2019 José Leocadio. Todos os direitos reservados</h4>
+</div>
 
 <!-- Autor: José Leocadio de Barros Junior -->
 

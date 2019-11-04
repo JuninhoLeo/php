@@ -47,6 +47,14 @@ Banco::desconectar();
     @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
 
+    .header {
+        background-color: black;
+        font-family: 'Modak', cursive;
+        color: paleturquoise;
+        padding: 2%;
+        text-align: center;
+    }
+
     h4 {
         font-size: 25px;
     }

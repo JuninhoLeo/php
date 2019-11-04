@@ -57,6 +57,14 @@ if ($tnome == false or $tsenha == false) {
       @import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
       @import url('https://fonts.googleapis.com/css?family=Lora&display=swap');
 
+      .header {
+         background-color: black;
+         font-family: 'Modak', cursive;
+         color: paleturquoise;
+         padding: 2%;
+         text-align: center;
+      }
+
       body {
          margin: 0;
          padding: 0;

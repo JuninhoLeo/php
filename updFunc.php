@@ -107,6 +107,14 @@ if ($tnome  == false && $tNuser == false && $tRG == false && $tCPF == false && $
 </head>
 
 <style>
+    .header {
+        background-color: black;
+        font-family: 'Modak', cursive;
+        color: paleturquoise;
+        padding: 2%;
+        text-align: center;
+    }
+
     .card {
         width: 190px;
         height: auto;

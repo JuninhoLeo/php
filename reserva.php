@@ -30,6 +30,14 @@ $Val = 0;
 </head>
 
 <style>
+    .header {
+        background-color: black;
+        font-family: 'Modak', cursive;
+        color: paleturquoise;
+        padding: 2%;
+        text-align: center;
+    }
+
     h4 {
         font-size: 25px;
         font-family: ;

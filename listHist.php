@@ -32,6 +32,14 @@ if (!isset($_SESSION['user'])) {
     @import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
 
+    .header {
+        background-color: black;
+        font-family: 'Modak', cursive;
+        color: paleturquoise;
+        padding: 2%;
+        text-align: center;
+    }
+
     h4 {
         font-size: 25px;
         font-family: ;
