@@ -123,9 +123,9 @@ Banco::desconectar();
             <?php
             $pdo = Banco::conectar();
             $sql = 'SELECT nome 
-                        FROM funcionarios 
-                        inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
-                        where usuarios.usuario =?';
+                    FROM funcionarios 
+                    inner join usuarios on(usuarios.usuario_id = funcionarios.usuario_id) 
+                    where usuarios.usuario =?';
             $q = $pdo->prepare($sql);
             $q->execute(array($_SESSION['user']));
             $data = $q->fetch(PDO::FETCH_ASSOC);
